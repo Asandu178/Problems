@@ -13,7 +13,3 @@ int maxBottlesDrunk(int numBottles, int numExchange) {
     }
     return bottlesDrunk;
 }
-
-int main() {
-    printf("%d\n", maxBottlesDrunk(13, 6));
-}
