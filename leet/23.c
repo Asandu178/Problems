@@ -16,50 +16,6 @@ int cmp(const void* a, const void* b) {
     return 1;
 }
 
-struct ListNode* initList(int val) {
-    struct ListNode* l = malloc(sizeof(struct ListNode));
-    l->val = val;
-    return l;
-}
-
-void addToList(struct ListNode **list, int val) {
-    if (!*list) {
-        *list = initList(val);
-    } else {
-        struct ListNode *l = *list;
-        while(l->next) 
-            l = l->next;
-        l->next = initList(val);
-    }
-}
-
-void freeList(struct ListNode **list) {
-    struct ListNode *tmp;
-    while(*list) {
-        tmp = *list;
-        *list = (*list)->next;
-        free(tmp);
-    }
-    *list = NULL;
-}
-
-void printList(struct ListNode *list) {
-    while(list->next) {
-        printf("%d->", list->val);
-        list = list->next;
-    }
-    printf("%d\n", list->val);
-}
-
-int totalElems(struct ListNode *list) {
-    int nr = 0;
-    while(list) {
-        nr++;
-        list = list->next;
-    }
-    return nr;
-}
-
 struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
     struct ListNode *list;
     int nr = 0;
@@ -96,11 +52,11 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
         list->val = v[i];
         list->next = NULL;
         if (!mergedKLists) {
-            mergedKLists = list;
+            mergedKLists = tail = list;
         } else {
             tail->next = list;
+            tail = list;
         }
-        tail = list;
     }
     free(v);
     return mergedKLists;
