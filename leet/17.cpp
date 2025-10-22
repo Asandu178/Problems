@@ -8,22 +8,35 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> sets;
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int> set;
-        backtrack(0, set, nums);
+    unordered_map<char, string> map = {
+        {'2', "abc"},
+        {'3', "def"},
+        {'4', "ghi"},
+        {'5', "jkl"},
+        {'6', "mno"},
+        {'7', "pqrs"},
+        {'8', "tuv"},
+        {'9', "wxyz"},
+    };
+    vector<string> letterCombinations(string digits) {
+        vector<string> output;
+        string s;
+        backtrack(output, 0, digits, s);
     }
 
-    void backtrack(int poz, vector<int>& set, vector<int>& nums) {
-        if (poz == nums.size()) {
-            sets.push_back(set);
+    void backtrack(vector<string>& output, int idx, string &digits, string &s) {
+        if (digits.size() == idx) {
+            output.push_back(s);
             return;
         }
 
-        backtrack(poz + 1, set, nums);
+        string x = map[digits[idx]];
 
-        set.push_back(nums[poz]);
-        backtrack(poz + 1, set, nums);
-        set.pop_back();
+        for (char c : x) {
+            s.push_back(c);
+            backtrack(output, idx + 1, digits, s);
+            s.pop_back();
+        }
+
     }
 };
