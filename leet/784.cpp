@@ -30,11 +30,3 @@ public:
             }
     }
 };
-
-int main() {
-    Solution sol;
-    vector<string> rez;
-    rez = sol.letterCasePermutation("a1b2");
-    for (int i = 0 ; i < rez.size() ; i++)
-        cout<< rez[i] << endl;
-}
